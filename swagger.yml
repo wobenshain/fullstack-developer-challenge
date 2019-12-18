@@ -1,0 +1,141 @@
+consumes:
+  - application/json
+info:
+  description: api for Bellese fullstack challenge
+  title: Bellese challenge
+  version: 0.1.0
+produces:
+  - application/json
+schemes:
+  - http
+swagger: "2.0"
+definitions:
+  error:
+    type: object
+    required:
+      - message
+    properties:
+      code:
+        type: integer
+        format: int64
+      message:
+        type: string
+  item:
+    required:
+      - name
+      - description
+      - picture
+    properties:
+      id:
+        type: integer
+        format: int64
+        readOnly: true
+      name:
+        type: string
+        minLength: 1
+      description:
+        type: string
+        minLength: 1
+      picture:
+        type: string
+        minLength: 1
+      keyValueFields:
+        type: array
+        items:
+          $ref: "#/definitions/keyValue"
+  keyValue:
+    required:
+      - name
+    properties:
+      id:
+        type: integer
+        format: int64
+        readOnly: true
+      name:
+        type: string
+        minLength: 1
+      value:
+        type: string
+        minLength: 1
+paths:
+  /item:
+    get:
+      responses:
+        200:
+          description: list all items
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/item"
+        default:
+          description: generic error response
+          schema:
+            $ref: "#/definitions/error"
+    post:
+      parameters:
+        - in: body
+          name: item
+          description: the item to create
+          schema:
+            $ref: "#/definitions/item"
+      responses:
+        200:
+          description: create new item
+          schema:
+            $ref: "#/definitions/item"
+        default:
+          description: generic error response
+          schema:
+            $ref: "#/definitions/error"
+  /item/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          description: id of the item to fetch
+          required: true
+          type: number
+      responses:
+        200:
+          description: get an item
+          schema:
+            $ref: "#/definitions/item"
+        default:
+          description: generic error response
+          schema:
+            $ref: "#/definitions/error"
+    patch:
+      parameters:
+        - in: path
+          name: id
+          description: id of the item to fetch
+          required: true
+          type: number
+        - in: body
+          name: item
+          description: the item to create
+          schema:
+            $ref: "#/definitions/item"
+      responses:
+        200:
+          description: update an item
+          schema:
+            $ref: "#/definitions/item"
+        default:
+          description: generic error response
+          schema:
+            $ref: "#/definitions/error"
+    delete:
+      parameters:
+        - in: path
+          name: id
+          description: id of the item to fetch
+          required: true
+          type: number
+      responses:
+        202:
+          description: remove an item
+        default:
+          description: generic error response
+          schema:
+            $ref: "#/definitions/error"

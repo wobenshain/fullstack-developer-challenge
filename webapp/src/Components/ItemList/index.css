@@ -1,0 +1,8 @@
+.item-list {
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    height: calc(100vh - 17px - 2vmin);
+    overflow-x: hidden;
+    overflow-y: auto;
+}

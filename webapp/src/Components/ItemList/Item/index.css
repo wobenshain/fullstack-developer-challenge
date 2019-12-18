@@ -1,0 +1,45 @@
+.item-list .item {
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 200px;
+    overflow: hidden;
+    width: 160px;
+}
+
+.item-list .item {
+    color: #000;
+    display: block;
+    margin: 5px;
+    text-decoration: none;
+}
+
+.item-list .item section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item-list .item header {
+    flex-basis: 160px;
+    font-weight: bold;
+    height: 24px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.item-list .item .img-container {
+    width: 60px;
+    height: 166px;
+}
+
+.item-list .item img {
+    position: relative;
+    margin-top: -50%;
+    top: 83px;
+    max-height: 200px;
+    max-width: 60px;
+}
+
+.item-list .item .description {
+    margin-left: 10px;
+    width: 90px;
+}
