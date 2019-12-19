@@ -4,13 +4,14 @@ package restapi
 
 import (
 	"crypto/tls"
-	"fmt"
+	"github.com/wobenshain/fullstack-developer-challenge/go/restapi/models"
 	"net/http"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
+	"github.com/wobenshain/fullstack-developer-challenge/go/inits"
 	"github.com/wobenshain/fullstack-developer-challenge/go/restapi/operations"
 )
 
@@ -31,35 +32,37 @@ func configureAPI(api *operations.BelleseChallengeAPI) http.Handler {
 	// api.Logger = log.Printf
 
 	api.JSONConsumer = runtime.JSONConsumer()
-
 	api.JSONProducer = runtime.JSONProducer()
 
-	if api.DeleteItemIDHandler == nil {
-		api.DeleteItemIDHandler = operations.DeleteItemIDHandlerFunc(func(params operations.DeleteItemIDParams) middleware.Responder {
-			return middleware.NotImplemented("operation .DeleteItemID has not yet been implemented")
-		})
-	}
-	if api.GetItemHandler == nil {
-		api.GetItemHandler = operations.GetItemHandlerFunc(func(params operations.GetItemParams) middleware.Responder {
-			fmt.Printf("%+v\n", params)
-			return middleware.NotImplemented("operation .GetItem has not yet been implemented")
-		})
-	}
-	if api.GetItemIDHandler == nil {
-		api.GetItemIDHandler = operations.GetItemIDHandlerFunc(func(params operations.GetItemIDParams) middleware.Responder {
-			return middleware.NotImplemented("operation .GetItemID has not yet been implemented")
-		})
-	}
-	if api.PatchItemIDHandler == nil {
-		api.PatchItemIDHandler = operations.PatchItemIDHandlerFunc(func(params operations.PatchItemIDParams) middleware.Responder {
-			return middleware.NotImplemented("operation .PatchItemID has not yet been implemented")
-		})
-	}
-	if api.PostItemHandler == nil {
-		api.PostItemHandler = operations.PostItemHandlerFunc(func(params operations.PostItemParams) middleware.Responder {
-			return middleware.NotImplemented("operation .PostItem has not yet been implemented")
-		})
-	}
+	repos := inits.InitRepositories()
+
+	api.DeleteItemIDHandler = operations.DeleteItemIDHandlerFunc(func(params operations.DeleteItemIDParams) middleware.Responder {
+		return middleware.NotImplemented("operation .DeleteItemID has not yet been implemented")
+	})
+	api.GetItemHandler = operations.GetItemHandlerFunc(func(params operations.GetItemParams) middleware.Responder {
+		items, err := repos.ItemRepository.GetAll()
+		if err != nil {
+			msg := err.Error()
+			return operations.NewGetItemDefault(500).WithPayload(&models.Error{
+				Message: &msg,
+			})
+		}
+		itemsPayload := make([]*models.Item, 0)
+		for _, i := range items {
+			itemsPayload = append(itemsPayload, &i)
+		}
+
+		return operations.NewGetItemOK().WithPayload(itemsPayload)
+	})
+	api.GetItemIDHandler = operations.GetItemIDHandlerFunc(func(params operations.GetItemIDParams) middleware.Responder {
+		return middleware.NotImplemented("operation .GetItemID has not yet been implemented")
+	})
+	api.PatchItemIDHandler = operations.PatchItemIDHandlerFunc(func(params operations.PatchItemIDParams) middleware.Responder {
+		return middleware.NotImplemented("operation .PatchItemID has not yet been implemented")
+	})
+	api.PostItemHandler = operations.PostItemHandlerFunc(func(params operations.PostItemParams) middleware.Responder {
+		return middleware.NotImplemented("operation .PostItem has not yet been implemented")
+	})
 
 	api.ServerShutdown = func() {}
 
