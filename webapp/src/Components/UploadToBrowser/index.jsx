@@ -17,8 +17,6 @@ const UploadToBrowser = ({ children, onChange }) => {
     /*
     const [height, setHeight] = useState(0);
     const [width, setWidth] = useState(0);
-    useEffect(() => {
-    }, []);
     */
 
     const handleChange = ({target}) => {

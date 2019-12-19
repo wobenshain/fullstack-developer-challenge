@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import DefaultApi from 'Swagger/src/api/DefaultApi';
 import Item from './Item';
 
 import './index.css';
@@ -8,6 +9,8 @@ const ItemList = () => {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
+        const api = new DefaultApi();
+        console.log(api);
         setItems([{
             id: 1,
             type: 'item',

@@ -4,11 +4,12 @@ package restapi
 
 import (
 	"crypto/tls"
+	"fmt"
 	"net/http"
 
-	errors "github.com/go-openapi/errors"
-	runtime "github.com/go-openapi/runtime"
-	middleware "github.com/go-openapi/runtime/middleware"
+	"github.com/go-openapi/errors"
+	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/runtime/middleware"
 
 	"github.com/wobenshain/fullstack-developer-challenge/go/restapi/operations"
 )
@@ -40,6 +41,7 @@ func configureAPI(api *operations.BelleseChallengeAPI) http.Handler {
 	}
 	if api.GetItemHandler == nil {
 		api.GetItemHandler = operations.GetItemHandlerFunc(func(params operations.GetItemParams) middleware.Responder {
+			fmt.Printf("%+v\n", params)
 			return middleware.NotImplemented("operation .GetItem has not yet been implemented")
 		})
 	}
