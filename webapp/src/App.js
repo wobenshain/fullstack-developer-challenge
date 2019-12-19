@@ -6,9 +6,9 @@ import {
     Route,
     Switch,
 } from 'react-router-dom';
-import AddItem from './Components/AddItem';
-import Item from './Components/Item';
-import ItemList from './Components/ItemList';
+import AddItem from 'Components/AddItem';
+import Item from 'Components/Item';
+import ItemList from 'Components/ItemList';
 
 import './App.css';
 

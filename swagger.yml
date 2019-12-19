@@ -8,6 +8,7 @@ produces:
   - application/json
 schemes:
   - http
+host: localhost:59828
 swagger: "2.0"
 definitions:
   error:

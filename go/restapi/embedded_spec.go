@@ -33,6 +33,7 @@ func init() {
     "title": "Bellese challenge",
     "version": "0.1.0"
   },
+  "host": "localhost:59828",
   "paths": {
     "/item": {
       "get": {
@@ -250,6 +251,7 @@ func init() {
     "title": "Bellese challenge",
     "version": "0.1.0"
   },
+  "host": "localhost:59828",
   "paths": {
     "/item": {
       "get": {

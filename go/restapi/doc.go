@@ -7,7 +7,7 @@ api for Bellese fullstack challenge
 
     Schemes:
       http
-    Host: localhost
+    Host: localhost:59828
     BasePath: /
     Version: 0.1.0
 

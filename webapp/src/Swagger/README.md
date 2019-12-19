@@ -110,7 +110,7 @@ api.itemGet(callback);
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:59828*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------

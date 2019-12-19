@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import DefaultApi from 'Swagger/src/api/DefaultApi';
-import Item from './Item';
+import React, {useContext, useEffect, useState} from 'react';
+import Item from 'Components/ItemList/Item';
+import ApiContext from 'Contexts/api';
 
 import './index.css';
 
 const ItemList = () => {
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState([]);
+    const { itemGet } = useContext(ApiContext);
 
     useEffect(() => {
-        const api = new DefaultApi();
-        console.log(api);
+        itemGet().then((resp) => { console.log(resp); });
         setItems([{
             id: 1,
             type: 'item',
@@ -26,7 +26,7 @@ const ItemList = () => {
             },
         }]);
         setLoading(false);
-    }, []);
+    }, [itemGet]);
     if (loading) return <div>Loading...</div>;
 
     return (

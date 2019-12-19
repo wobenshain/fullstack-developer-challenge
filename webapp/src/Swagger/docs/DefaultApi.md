@@ -1,6 +1,6 @@
 # BelleseChallenge.DefaultApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:59828*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

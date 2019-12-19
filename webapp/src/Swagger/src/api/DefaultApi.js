@@ -59,7 +59,7 @@
      * @param {module:api/DefaultApi~itemGetCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/Item>}
      */
-    this.itemGet = function(callback) {
+    this.itemGet = (callback) => {
       var postBody = null;
 
 
