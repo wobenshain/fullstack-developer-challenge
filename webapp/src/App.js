@@ -57,7 +57,7 @@ const App = () => {
                             </Switch>
                             <span>Item Inventory</span>
                             <Switch>
-                                <Route exact path="/item/edit" render={() => null} />
+                                <Route exact path="/item/edit*" render={() => null} />
                                 <Route exact path="/item/:id" render={({ match: { params: { id = 0 } } }) => <Link to={`/item/edit/${id}`} className="right">Edit</Link>} />
                                 <Route render={() => <Link to="/item/edit" className="right">Add Item +</Link>} />
                             </Switch>
