@@ -4,13 +4,10 @@ package restapi
 
 import (
 	"crypto/tls"
-	"github.com/wobenshain/fullstack-developer-challenge/go/restapi/models"
 	"net/http"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
-	"github.com/go-openapi/runtime/middleware"
-
 	"github.com/wobenshain/fullstack-developer-challenge/go/inits"
 	"github.com/wobenshain/fullstack-developer-challenge/go/restapi/operations"
 )
@@ -36,33 +33,7 @@ func configureAPI(api *operations.BelleseChallengeAPI) http.Handler {
 
 	repos := inits.InitRepositories()
 
-	api.DeleteItemIDHandler = operations.DeleteItemIDHandlerFunc(func(params operations.DeleteItemIDParams) middleware.Responder {
-		return middleware.NotImplemented("operation .DeleteItemID has not yet been implemented")
-	})
-	api.GetItemHandler = operations.GetItemHandlerFunc(func(params operations.GetItemParams) middleware.Responder {
-		items, err := repos.ItemRepository.GetAll()
-		if err != nil {
-			msg := err.Error()
-			return operations.NewGetItemDefault(500).WithPayload(&models.Error{
-				Message: &msg,
-			})
-		}
-		itemsPayload := make([]*models.Item, 0)
-		for _, i := range items {
-			itemsPayload = append(itemsPayload, &i)
-		}
-
-		return operations.NewGetItemOK().WithPayload(itemsPayload)
-	})
-	api.GetItemIDHandler = operations.GetItemIDHandlerFunc(func(params operations.GetItemIDParams) middleware.Responder {
-		return middleware.NotImplemented("operation .GetItemID has not yet been implemented")
-	})
-	api.PatchItemIDHandler = operations.PatchItemIDHandlerFunc(func(params operations.PatchItemIDParams) middleware.Responder {
-		return middleware.NotImplemented("operation .PatchItemID has not yet been implemented")
-	})
-	api.PostItemHandler = operations.PostItemHandlerFunc(func(params operations.PostItemParams) middleware.Responder {
-		return middleware.NotImplemented("operation .PostItem has not yet been implemented")
-	})
+	inits.InitEndpoints(api, repos)
 
 	api.ServerShutdown = func() {}
 
@@ -84,11 +55,11 @@ func configureServer(s *http.Server, scheme, addr string) {
 // The middleware configuration is for the handler executors. These do not apply to the swagger.json document.
 // The middleware executes after routing but before authentication, binding and validation
 func setupMiddlewares(handler http.Handler) http.Handler {
-	return handler
+	return inits.InitLocalMiddlewares(handler)
 }
 
 // The middleware configuration happens before anything, this middleware also applies to serving the swagger.json document.
 // So this is a good place to plug in a panic handling middleware, logging and metrics
 func setupGlobalMiddleware(handler http.Handler) http.Handler {
-	return handler
+	return inits.InitGlobalMiddlewares(handler)
 }

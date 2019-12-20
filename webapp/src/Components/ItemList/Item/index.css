@@ -19,11 +19,20 @@
 }
 
 .item-list .item header {
-    flex-basis: 160px;
     font-weight: bold;
     height: 24px;
     line-height: 1.5;
     margin-bottom: 10px;
+    position: relative;
+    width: 160px;
+}
+
+.item-list .item header .anticon {
+    background: #FFF;
+    border-radius: 50%;
+    position: absolute;
+    top: .25em;
+    right: .25em;
 }
 
 .item-list .item .img-container {

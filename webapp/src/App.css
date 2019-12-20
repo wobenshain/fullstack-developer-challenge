@@ -4,6 +4,33 @@
 
 .App-header {
   background-color: #282c34;
-  font-size: calc(10px + 2vmin);
   color: white;
+  font-size: calc(10px + 2vmin);
+  padding: 15px 0;
+}
+
+.App-header .header-limit {
+  margin: 0 auto;
+  max-width: 800px;
+  position: relative;
+}
+
+.App-header a {
+  background: #CCC;
+  border: 1px solid #282c34;
+  border-radius: 5px;
+  color: #000;
+  display: inline-block;
+  line-height: 1;
+  padding: 5px;
+  position: absolute;
+  text-decoration: none;
+}
+
+.App-header a.left {
+  left: 0;
+}
+
+.App-header a.right {
+  right: 0;
 }

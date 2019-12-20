@@ -84,7 +84,7 @@
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
-    }
+    };
 
     /**
      * Callback function to receive the result of the itemIdDelete operation.
@@ -98,7 +98,7 @@
      * @param {Number} id id of the item to fetch
      * @param {module:api/DefaultApi~itemIdDeleteCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    this.itemIdDelete = function(id, callback) {
+    this.itemIdDelete = (id, callback) => {
       var postBody = null;
 
       // verify the required parameter 'id' is set
@@ -144,7 +144,7 @@
      * @param {module:api/DefaultApi~itemIdGetCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/Item}
      */
-    this.itemIdGet = function(id, callback) {
+    this.itemIdGet = (id, callback)  => {
       var postBody = null;
 
       // verify the required parameter 'id' is set
@@ -192,7 +192,7 @@
      * @param {module:api/DefaultApi~itemIdPatchCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/Item}
      */
-    this.itemIdPatch = function(id, opts, callback) {
+    this.itemIdPatch = (id, opts, callback) => {
       opts = opts || {};
       var postBody = opts['item'];
 
@@ -240,7 +240,7 @@
      * @param {module:api/DefaultApi~itemPostCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/Item}
      */
-    this.itemPost = function(opts, callback) {
+    this.itemPost = (opts, callback) => {
       opts = opts || {};
       var postBody = opts['item'];
 

@@ -1,10 +1,16 @@
 package inmem
 
-import "github.com/wobenshain/fullstack-developer-challenge/go/restapi/models"
-import "github.com/wobenshain/fullstack-developer-challenge/go/types"
+import (
+	"github.com/go-openapi/errors"
+	"github.com/wobenshain/fullstack-developer-challenge/go/restapi/models"
+	"github.com/wobenshain/fullstack-developer-challenge/go/types"
+	"math"
+	"sync"
+)
 
 type Item struct {
 	items map[int]models.Item
+	lock sync.Mutex
 }
 
 func InitItemRepository() types.ItemRepository {
@@ -32,8 +38,44 @@ func InitItemRepository() types.ItemRepository {
 
 func (i *Item) GetAll() ([]models.Item, error) {
 	items := make([]models.Item, 0)
-	for _, i := range i.items {
-		items = append(items, i)
+	for _, item := range i.items {
+		items = append(items, item)
 	}
 	return items, nil
+}
+
+func (i *Item) Get(id int) (models.Item, error) {
+	item, ok := i.items[id]
+	if !ok {
+		return models.Item{}, errors.NotFound("Could not find item with id %d", id)
+	}
+	return item, nil
+}
+
+func (i *Item) Create(item models.Item) (models.Item, error) {
+	i.lock.Lock()
+	defer i.lock.Unlock()
+	id := 0
+	for i := range i.items {
+		id = int(math.Max(float64(i), float64(id)))
+	}
+	id += 1
+	item.ID = int64(id)
+	i.items[id] = item
+	return item, nil
+}
+
+func (i *Item) Update(item models.Item) (models.Item, error) {
+	i.lock.Lock()
+	defer i.lock.Unlock()
+	i.items[int(item.ID)] = item
+	return item, nil
+}
+
+func (i *Item) Delete(id int) (models.Item, error) {
+	i.lock.Lock()
+	defer i.lock.Unlock()
+	item := i.items[id]
+	delete(i.items, id)
+	return item, nil
 }
