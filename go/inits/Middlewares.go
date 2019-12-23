@@ -1,17 +1,32 @@
 package inits
 
 import (
-	"github.com/dre1080/recover"
+	"encoding/json"
+	"fmt"
 	"github.com/rs/cors"
-	"log"
 	"net/http"
 )
 
+type jsonError struct{
+	Message interface{} `json:"message"`
+}
+
 func initPanicHandler(handler http.Handler) http.Handler {
-	recovery := recover.New(&recover.Options{
-		Log: log.Print,
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		defer func() {
+			if err := recover(); err != nil {
+				fmt.Println(err)
+				w.WriteHeader(http.StatusInternalServerError)
+				w.Header().Set(http.CanonicalHeaderKey("Content-Type"), "application/json; charset=utf-8")
+				e := jsonError{Message: "Internal Server Error"}
+				err := json.NewEncoder(w).Encode(e)
+				if err != nil {
+					fmt.Println(err)
+				}
+			}
+		}()
+		handler.ServeHTTP(w, r)
 	})
-	return recovery(handler)
 }
 
 func initCors(handler http.Handler) http.Handler {
@@ -20,7 +35,6 @@ func initCors(handler http.Handler) http.Handler {
 			return true
 		},
 		AllowedMethods: []string{"GET", "POST", "PATCH", "DELETE"},
-		Debug: true,
 	})
 	return allowLocal.Handler(handler)
 }

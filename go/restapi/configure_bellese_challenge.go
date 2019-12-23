@@ -8,6 +8,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	_ "github.com/lib/pq"
 	"github.com/wobenshain/fullstack-developer-challenge/go/inits"
 	"github.com/wobenshain/fullstack-developer-challenge/go/restapi/operations"
 )

@@ -13,6 +13,7 @@
 
 .item-display .img-container {
     float: left;
+    margin: 5px 15px 0 0;
     text-align: center;
     width: 30%;
 }

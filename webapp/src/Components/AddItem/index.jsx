@@ -44,7 +44,8 @@ export const AddItem = ({ history, match: { params: { id = 0 } } }) => {
         }
     }, [id]);
 
-    function onUpsert(err, { id = 0 }) {
+    function onUpsert(err, data) {
+        const { id = 0 } = data || {};
         setLoading(false);
         if (!err) {
             if (id) {
@@ -52,9 +53,10 @@ export const AddItem = ({ history, match: { params: { id = 0 } } }) => {
             } else {
                 history.push('/item');
             }
+            return null
         }
-        if (!err) return null;
-        const {response: {body: { message = serverDown} = {}} = {}} = err;
+        const {response: { text } = {}} = err;
+        const { message = serverDown} = JSON.parse(text);
         notification.error({ message: serverError(message) });
     }
 

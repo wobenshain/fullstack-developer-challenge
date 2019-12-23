@@ -1,9 +1,8 @@
 package postgres
 
 type Item struct {
-	ID          int
-	Name        string
-	Description string
-	Picture     string
-	Fields      []ItemField
+	ID             int    `db:"id"`
+	Name           string `db:"name"`
+	Picture        string `db:"picture"`
+	Description    string `db:"description"`
 }

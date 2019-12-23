@@ -19,7 +19,9 @@ const Item = ({ match: { params: { id = 0 } } }) => {
             }
             setLoading(false);
             if (!err) return null;
-            const {response: {body: { message = serverDown} = {}} = {}} = err;
+            console.log(err.response);
+            const {response: { text } = {}} = err;
+            const { message = serverDown } = JSON.parse(text);
             notification.error({ message: serverError(message) });
         });
     }, [id]);
