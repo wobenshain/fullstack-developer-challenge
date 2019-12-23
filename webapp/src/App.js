@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
     BrowserRouter as Router,
     Link,
@@ -6,46 +6,20 @@ import {
     Route,
     Switch,
 } from 'react-router-dom';
-import {notification} from "antd";
 import AddItem from 'Components/AddItem';
 import Item from 'Components/Item';
 import ItemList from 'Components/ItemList';
 import LoadingNotification from "Components/LoadingNotification";
 import LoadingContext from 'Contexts/loading';
-import { negativeFetch } from 'Consts/errorCodes';
 import history from 'Helpers/history';
+import { useLoading } from "Hooks/providers";
 
 import 'antd/dist/antd.css';
 import './App.css';
 
 const App = () => {
-    notification.config({});
-    const [loading, setLoading] = useState(false)
-    const [toggle, setToggle] = useState(null);
-    const [outstanding, setOutstanding] = useState(0);
-
-    useEffect(() => {
-        if (toggle !== null) {
-            if (toggle) {
-                setOutstanding(outstanding + 1);
-            } else {
-                let newValue = outstanding - 1;
-                if (newValue < 0) {
-                    newValue = 0;
-                    notification.warn({ message: negativeFetch });
-                }
-                setOutstanding(newValue);
-            }
-            setToggle(null);
-        }
-    }, [toggle]);
-
-    useEffect(() => {
-        setLoading(outstanding > 0);
-    }, [outstanding]);
-
     return (
-        <LoadingContext.Provider value={{ loading, setLoading: setToggle }}>
+        <LoadingContext.Provider value={useLoading()}>
             <Router history={history}>
                 <div className="App">
                     <header className="App-header">

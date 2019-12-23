@@ -24,6 +24,7 @@
     line-height: 1.5;
     margin-bottom: 10px;
     position: relative;
+    text-align: center;
     width: 160px;
 }
 
@@ -42,13 +43,12 @@
 
 .item-list .item img {
     position: relative;
-    margin-top: -50%;
-    top: 83px;
     max-height: 200px;
     max-width: 60px;
 }
 
 .item-list .item .description {
+    line-height: 1;
     margin-left: 10px;
-    width: 90px;
+    width: 80px;
 }

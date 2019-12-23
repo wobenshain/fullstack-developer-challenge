@@ -1,7 +1,27 @@
 .item-display {
-    display: flex;
+    margin: 0 auto;
+    max-width: 800px;
 }
 
-.item-display {
+.item-display header {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
 
+.item-display .img-container {
+    float: left;
+    text-align: center;
+    width: 30%;
+}
+
+.item-display img {
+    max-width: 100%;
+}
+
+.item-display ul {
+    list-style: none;
+    margin-top: 10px;
 }

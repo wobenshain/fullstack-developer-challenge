@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Input } from 'antd';
-import { setStateOnChange } from "Helpers/events";
+import { setStateOnChange } from 'Helpers/events';
+
+import './index.css';
 
 const KeyValuePair = ({ onChange, id, name, value }) => {
     const [localName, setName] = useState(name);
@@ -25,7 +27,7 @@ const KeyValueList = ({ kvList, onChange }) => {
         onChange(id, name, value);
     };
     return (
-        <ul>
+        <ul className="KeyValueList">
             {
                 kvList.map(({id, ...kv}) => (
                     <KeyValuePair key={id} id={id} {...kv} onChange={handleChange} />

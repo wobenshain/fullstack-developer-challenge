@@ -1,0 +1,13 @@
+.UploadToBrowser {
+    height: 200px;
+    position: relative;
+}
+
+.UploadToBrowser > input {
+    display: block;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}

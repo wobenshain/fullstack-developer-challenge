@@ -1,0 +1,44 @@
+.add-item {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.add-item .name {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.add-item .UploadToBrowser {
+    color: #999;
+    position: relative;
+    text-align: center;
+    width: 30%;
+}
+
+.add-item .UploadToBrowser:not(.loaded) {
+    border: 1px dashed #999;
+}
+
+.add-item .upload-image {
+    font-size: 30px;
+    font-weight: lighter;
+    margin-top: 100px;
+    transform: translate(0, -50%);
+}
+
+.add-item .description {
+    margin-left: 10px;
+    width: calc(70% - 10px);
+}
+
+.add-item .KeyValueList {
+    margin: 10px 0 0;
+    width: 100%;
+}
+
+.add-item button {
+    width: 100%;
+}

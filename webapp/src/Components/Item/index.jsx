@@ -28,12 +28,12 @@ const Item = ({ match: { params: { id = 0 } } }) => {
     const { name, description, picture, keyValueFields } = item;
     return (
         <div className="item-display">
-            <div>{name}</div>
+            <header>{name}</header>
             <div className="img-container">
                 <img src={picture} alt={name} />
             </div>
-            <div>
-                <div>{description}</div>
+            <div className="properties">
+                <div className="description">{description}</div>
                 <ul>
                     { keyValueFields.map(({ id, name, value}) => (
                         <li key={id}>

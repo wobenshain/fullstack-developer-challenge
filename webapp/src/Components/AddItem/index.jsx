@@ -7,6 +7,8 @@ import { serverDown, serverError } from 'Consts/errorCodes';
 
 import KeyValueList from "./KeyValueList";
 
+import './index.css';
+
 const { TextArea } = Input;
 
 const onChange = (set) => ({ target }) => {
@@ -80,20 +82,21 @@ export const AddItem = ({ history, match: { params: { id = 0 } } }) => {
     }
 
     return (
-        <div>
-            <Input onChange={onChange(setName)} value={name} />
-            <Upload onChange={setPicture}>
+        <div className="add-item">
+            <Input className="name" onChange={onChange(setName)} value={name} placeholder="Item Name" />
+            <Upload className={picture ? 'loaded' : ''} onChange={setPicture}>
                 {
                     picture
-                        ? <img src={picture} alt={name} style={{ width: '100%' }} />
+                        ? <img src={picture} alt={name} style={{ maxHeight: '200px', maxWidth: '100%' }} />
                         : (
-                            <div>
+                            <div className="upload-image">
                                 <Icon type="plus" />
                                 <div className="ant-upload-text">Upload</div>
                             </div>
-                        )}
+                        )
+                }
             </Upload>
-            <TextArea onChange={onChange(setDescription)} value={description} />
+            <TextArea className="description" onChange={onChange(setDescription)} value={description} placeholder="Description" />
             <KeyValueList kvList={keyValueFields} onChange={handle} />
             <Button onClick={handleClick}>{ id ? 'Update' : 'Create' }</Button>
         </div>

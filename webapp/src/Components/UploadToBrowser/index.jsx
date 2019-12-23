@@ -1,24 +1,8 @@
-import React, { Component, createRef /*, useEffect, useState*/ } from 'react';
+import React from 'react';
 
-class Wrapped extends Component {
-    constructor(props) {
-        super(props);
+import './index.css';
 
-        this.viewport = createRef()
-    }
-
-    render() {
-        const { children } = this.props;
-        return <div ref={this.viewport}>{children}</div>;
-    }
-}
-
-const UploadToBrowser = ({ children, onChange }) => {
-    /*
-    const [height, setHeight] = useState(0);
-    const [width, setWidth] = useState(0);
-    */
-
+const UploadToBrowser = ({ children, className = '', onChange }) => {
     const handleChange = ({target}) => {
         const { files } = target;
         if (files.length < 1) {
@@ -34,9 +18,9 @@ const UploadToBrowser = ({ children, onChange }) => {
     };
 
     return (
-        <div>
+        <div className={`UploadToBrowser ${className}`.trim()}>
+            {children}
             <input type="file" onChange={handleChange} />
-            <Wrapped>{children}</Wrapped>
         </div>
     );
 };
